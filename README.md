@@ -4,6 +4,8 @@ A Python tool to convert Apple HDR HEIC files to EXR format while preserving HDR
 
 ## Background
 
+![hdr screenshot sample](./examples/sample_output_acr_hdr_output.jpg)
+
 macOS Tahoe introduced HDR screenshot support, but the generated HEIC files with HDR information can only be viewed on Apple devices. This tool converts Apple HDR format to standard EXR format for easy sharing and editing in software like Adobe Photoshop, Camera Raw, and Affinity Photo, etc.
 
 ---

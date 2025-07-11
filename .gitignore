@@ -52,3 +52,6 @@ tmp/
 
 # Logs
 *.log
+
+# virtual environment
+heicConvert
