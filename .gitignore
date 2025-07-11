@@ -50,15 +50,5 @@ Thumbs.db
 temp/
 tmp/
 
-# Output files
-*.exr
-*.png
-*.tiff
-*.tif
-
 # Logs
 *.log
-
-# Test files
-test_*.py
-*_test.py 
