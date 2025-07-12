@@ -12,8 +12,7 @@ macOS Tahoe introduced HDR screenshot support, but the generated HEIC files with
 
 ---
 
-**Important:**
-
+> [!IMPORTANT]
 > To ensure full HDR information is preserved, you must first export your photo from the Mac Photos app as a JPEG, and in the export dialog, set the "Color Profile" to **Original**. Only this export method will include the Apple HDR gain map in the JPEG file. Directly using HEIC or other export options will not preserve the HDR gain map.
 
 ---
