@@ -1,5 +1,7 @@
 # Apple HEIC to EXR Converter
 
+English | [中文](README_zh.md)
+
 A Python tool to convert Apple HDR HEIC files to EXR format while preserving HDR information. This tool extracts gain maps from Apple's proprietary HDR format and synthesizes them into standard HDR EXR files.
 
 ## Background
