@@ -33,7 +33,7 @@ Install ExifTool:
 
 ### Convert Apple HDR JPEG to EXR
 ```bash
-python apple_hdr_converter.py input.jpeg output.exr
+python apple_hdr_converter.py input.jpeg
 ```
 
 ### Convert HEIC to EXR (macOS only)
@@ -42,19 +42,19 @@ python heic_converter.py input.heic output.exr
 ```
 
 ### Options
+- `--output`, `-o`: Specify output EXR file path (default: input_name.exr)
 - `--tone-mapping`: Apply tone mapping to reduce brightness for SDR displays
-- `--format png`: Output as 16-bit PNG instead of EXR
 
 ### Examples
 ```bash
-# Basic conversion
-python apple_hdr_converter.py photo.jpg photo.exr
+# Basic conversion (outputs photo.exr)
+python apple_hdr_converter.py photo.jpg
+
+# Specify custom output path
+python apple_hdr_converter.py photo.jpg --output my_hdr.exr
 
 # With tone mapping
-python apple_hdr_converter.py photo.jpg photo.exr --tone-mapping
-
-# Convert to PNG
-python apple_hdr_converter.py photo.jpg photo.png --format png
+python apple_hdr_converter.py photo.jpg --tone-mapping
 ```
 ---
 

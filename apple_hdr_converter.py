@@ -158,35 +158,34 @@ def save_exr(hdr_array, output_path):
     exr_file.writePixels(channels)
     exr_file.close()
 
-def save_png(hdr_array, output_path):
-    """Save as 16-bit PNG"""
-    hdr_16bit = (hdr_array * 65535).astype(np.uint16)
-    hdr_16bit = np.clip(hdr_16bit, 0, 65535)
-    hdr_bgr = hdr_16bit[:, :, ::-1]  # BGR for OpenCV
-    cv2.imwrite(str(output_path), hdr_bgr)
+
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Convert Apple HDR JPEG to EXR/PNG",
+        description="Convert Apple HDR JPEG to EXR",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  %(prog)s input.jpg output.exr
-  %(prog)s input.jpg output.exr --tone-mapping
-  %(prog)s input.jpg output.png --format png
+  %(prog)s input.jpg
+  %(prog)s input.jpg --output custom_output.exr
+  %(prog)s input.jpg --tone-mapping
         """
     )
     parser.add_argument("input", help="Input Apple HDR JPEG file")
-    parser.add_argument("output", help="Output file path")
-    parser.add_argument("--format", choices=["exr", "png"], default="exr",
-                       help="Output format (default: exr)")
+    parser.add_argument("--output", "-o", help="Output EXR file path (default: input_name.exr)")
     parser.add_argument("--tone-mapping", action="store_true",
                        help="Apply tone mapping to reduce brightness")
     
     args = parser.parse_args()
     
     input_path = Path(args.input)
-    output_path = Path(args.output)
+    
+    # Generate output path if not specified
+    if args.output:
+        output_path = Path(args.output)
+    else:
+        # Default: same name as input but with .exr extension
+        output_path = input_path.with_suffix('.exr')
     
     if not input_path.exists():
         print(f"Error: Input file '{input_path}' does not exist")
@@ -224,19 +223,9 @@ Examples:
             if args.tone_mapping:
                 hdr_result = apply_tone_mapping(hdr_result)
             
-            # Save result
-            output_ext = output_path.suffix.lower()
-            
-            if output_ext == '.exr':
-                save_exr(hdr_result, output_path)
-                print(f"✓ Saved as EXR: {output_path}")
-            elif output_ext == '.png':
-                save_png(hdr_result, output_path)
-                print(f"✓ Saved as PNG: {output_path}")
-            else:
-                print(f"Error: Unsupported output format: {output_ext}")
-                print("Supported formats: .exr, .png")
-                sys.exit(1)
+            # Save result as EXR
+            save_exr(hdr_result, output_path)
+            print(f"✓ Saved as EXR: {output_path}")
             
         except Exception as e:
             print(f"Error during processing: {e}")

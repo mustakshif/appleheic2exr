@@ -33,7 +33,7 @@ pip install -r requirements.txt
 
 ### 转换Apple HDR JPEG为EXR
 ```bash
-python apple_hdr_converter.py input.jpeg output.exr
+python apple_hdr_converter.py input.jpeg
 ```
 
 ### 转换HEIC为EXR（仅限macOS）
@@ -42,19 +42,19 @@ python heic_converter.py input.heic output.exr
 ```
 
 ### 选项
+- `--output`, `-o`: 指定输出EXR文件路径（默认：input_name.exr）
 - `--tone-mapping`: 应用色调映射以降低SDR显示器的亮度
-- `--format png`: 输出为16位PNG而非EXR
 
 ### 示例
 ```bash
-# 基本转换
-python apple_hdr_converter.py photo.jpg photo.exr
+# 基本转换（输出 photo.exr）
+python apple_hdr_converter.py photo.jpg
+
+# 指定自定义输出路径
+python apple_hdr_converter.py photo.jpg --output my_hdr.exr
 
 # 使用色调映射
-python apple_hdr_converter.py photo.jpg photo.exr --tone-mapping
-
-# 转换为PNG
-python apple_hdr_converter.py photo.jpg photo.png --format png
+python apple_hdr_converter.py photo.jpg --tone-mapping
 ```
 ---
 
